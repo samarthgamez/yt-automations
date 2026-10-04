@@ -1,0 +1,221 @@
+[project]
+name = "ytptube"
+version = "1.0.0"
+description = "A self-hosted download manager, automation interface, and media library preparation layer for yt-dlp."
+readme = "README.md"
+requires-python = ">=3.13"
+license = { text = "MIT" }
+authors = [{ name = "Abdulmohsen", email = "contact@arabcoders.org" }]
+dependencies = [
+  # Windows‐only
+  "tzdata; sys_platform == 'win32'",
+  "python-magic-bin; sys_platform == 'win32'",
+  # Non‐Windows
+  "python-magic>=0.4.27; sys_platform != 'win32'",
+  # Cross‐platform
+  "aiohttp>=3.9.3",
+  "coloredlogs>=15.0.1",
+  "aiocron>=1.8",
+  "python-dotenv>=1.0.1",
+  "debugpy>=1.8.1",
+  "httpx[brotli,http2,socks,zstd]",
+  "async-timeout",
+  "pyjson5",
+  "curl_cffi==0.14",
+  "pysubs2",
+  "regex",
+  "mutagen",
+  "brotli",
+  "brotlicffi",
+  "anyio",
+  "yt-dlp[default]",
+  "platformdirs",
+  "packaging",
+  "multidict==6.5.1",
+  "dateparser>=1.2.1",
+  "defusedxml>=0.7.1",
+  "zipstream-ng>=1.8.0",
+  "apprise>=1.9.3",
+  "bgutil-ytdlp-pot-provider>=2.0.0",
+  "pycryptodome>=3.23.0",
+  "httpx-curl-cffi>=0.1.4",
+  "parsel>=1.10.0",
+  "jmespath>=1.0.1",
+  "jsonschema>=4.23.0",
+  "aiosqlite>=0.22.0",
+  "sqlalchemy>=2.0.45",
+  "pydantic>=2.12.5",
+  "playwright>=1.58.0",
+  "psutil>=7.1.3",
+  "joserfc>=1.7.5",
+]
+
+[tool.ruff]
+exclude = [
+  ".bzr",
+  ".direnv",
+  ".eggs",
+  ".git",
+  ".git-rewrite",
+  ".hg",
+  ".mypy_cache",
+  ".nox",
+  ".pants.d",
+  ".pyenv",
+  ".pytest_cache",
+  ".pytype",
+  ".ruff_cache",
+  ".svn",
+  ".tox",
+  ".venv",
+  ".vscode",
+  "__pypackages__",
+  "_build",
+  "buck-out",
+  "build",
+  "dist",
+  "node_modules",
+  "site-packages",
+  "venv",
+]
+
+line-length = 120
+indent-width = 4
+
+target-version = "py313"
+
+[project.optional-dependencies]
+installer = ["pyinstaller"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+per-file-ignores = { "test_*.py" = [
+  "ALL",
+], "migrations/versions/*.py" = [
+  "ALL",
+] }
+
+ignore = [
+  "ANN",
+  "COM",
+  "C90",
+  "DJ",
+  "EXE",
+  "T10",
+  "TID",
+  "PTH",
+
+  "D100",
+  "D101",
+  "D102",
+  "D103",
+  "D104",
+  "D105",
+  "D106",
+  "D107",
+  "D200",
+  "D205",
+  "D212",
+  "D400",
+  "D401",
+  "D415",
+  "E402",
+  "E501",
+  "TRY003",
+  "TD002",
+  "TD003",
+  "FIX002",
+  "N806",
+  "PGH003",
+  "D404",
+  "PLR0913",
+  "INP001",
+  "G004",
+  "SIM105",
+  "SIM300",
+  "BLE001",
+  "TRY400",
+  "S104",
+  "PLR2004",
+  "S110",
+  "N812",
+  "S108",
+  "RUF006",
+  "RUF012",
+  "RUF013",
+  "TRY002",
+  "TRY401",
+  "A001",
+  "A002",
+  "SLF001",
+  "FBT001",
+  "FBT002",
+  "TRY300",
+  "PLR0911",
+  "PLR0912",
+  "PLR0915",
+  "PLW2901",
+  "ERA001",
+  "S101",
+  "LOG015",
+  "PLC0415",
+  "S603",
+  "D203",
+  "TRY004",
+  "PT011",
+  "RUF001",
+  "S311",
+  "TC001",
+  "ASYNC240",
+  # will be fixed in the future
+  "UP042",
+  "FURB171",
+  "FURB110",
+  "PLW0108",
+  "CPY001",
+  "PLR0917",
+  "LOG004",
+]
+
+fixable = ["ALL"]
+unfixable = []
+
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = false
+docstring-code-line-length = "dynamic"
+
+[tool.ty.src]
+include = ["app"]
+
+[tool.uv]
+link-mode = "copy"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["app/tests", "app/features"]
+addopts = "-q --tb=short"
+required_plugins = ["pytest-timeout>=2.4.0"]
+timeout = 30
+session_timeout = 300
+filterwarnings = [
+  "ignore:Parsing dates involving a day of month without a year:DeprecationWarning",
+  "ignore:This process \\(pid\\=.*\\) is multi-threaded, use of fork\\(\\) may lead to deadlocks in the child\\.:DeprecationWarning",
+]
+
+[dependency-groups]
+dev = [
+  "debugpy>=1.8.16",
+  "pytest>=8.4.2",
+  "pytest-asyncio>=1.1.0",
+  "pytest-timeout>=2.4.0",
+  "ruff>=0.13.0",
+  "pip>=26.0.0",
+  "ty>=0.0.53",
+  "watchfiles>=1.2.0",
+]

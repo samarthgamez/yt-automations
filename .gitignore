@@ -1,0 +1,43 @@
+# compiled output
+/frontend/dist
+/ui/dist
+/ui/exported/CHANGELOG.json
+/webext/ytptube-extension.zip
+
+# dependencies
+**/node_modules/*
+**/.nuxt/*
+
+# IDEs and editors
+/ui/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/settings.json
+.history/*
+
+# Keep Var dir
+var/*
+!./var/config/.gitkeep
+!./var/downloads/.gitkeep
+!./var/tmp/.gitkeep
+
+# Misc - python stuff
+__pycache__
+.venv
+.idea
+dist
+build
+version.txt
+test_impl.py
+./eslint.config.js
+.pytest_cache
